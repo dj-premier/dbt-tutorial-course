@@ -1,0 +1,13 @@
+{
+	"sqltools.connections": [
+		{
+			"name": "BigQuery",
+			"authenticator": "CLI",
+			"location": "us",
+			"previewLimit": 50,
+			"driver": "BigQuery",
+			"projectId": "elevated-heaven-448209-i5"
+		}
+	],
+	"sqltools.useNodeRuntime": true
+}
