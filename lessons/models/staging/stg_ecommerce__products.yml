@@ -36,3 +36,24 @@ models:
               # quote defaults to true, but this just shows how you could set it to
               # false if you wanted to have non-string values (e.g. numbers or a TRUE/FALSE column)
               quote: true
+
+      - name: brand
+
+
+    latest_version: 1
+    versions:
+      - v: 1
+        columns:
+        # This means: use the 'columns' list from above, but exclude "brand" as we added it in v2
+        - include: all
+          exclude: [brand]
+
+      - v: 2
+        # Makes this table stay as stg_ecommerce__products in our database!
+        # config:
+        #   alias: stg_ecommerce__products
+        config:
+            alias: stg_ecommerce__products
+        columns:
+        # This means: use the 'columns' list from above
+        - include: all

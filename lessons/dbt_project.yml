@@ -22,6 +22,9 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+on-run-start:
+  - "{{ get_brand_name() }}"
+
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -35,9 +38,12 @@ models:
     +persist_docs: # Writes all of our column descriptions into BigQuery!
       relation: true
       columns: true
-  # Table deletes 168 hours (7 days) after creation
+  # Table deletes 168 hours (7 days) after creation (or 1 hour if it's a test)
   # Note, for incremental models this does not reset each run!
-  +hours_to_expiration: 168
+  +hours_to_expiration: |
+    {% if target.name == 'test' %} 1
+    {% else %} 168
+    {% endif %}
 
 tests:
   lessons:
